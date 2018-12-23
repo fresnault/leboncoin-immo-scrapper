@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import fr.fresnault.web.rest.vm.LeBonCoinPageResults;
+
 @Service
 public class LeBonCoinScrapperService {
 
@@ -29,14 +31,16 @@ public class LeBonCoinScrapperService {
 		headers.put("api_key", Arrays.asList("ba0c2dad52b3ec"));
 
 		// body
-		String body = "{\"filters\":{\"category\":{\"id\":\"9\"},\"enums\":{\"ad_type\":[\"offer\"],\"real_estate_type\":[\"1\",\"2\",\"3\"]},\"keywords\":{},\"location\":{},\"ranges\":{}},\"limit\":100, \"offset\": 100, \"limit_alu\":0}";
+		String body = "{\"filters\":{\"category\":{\"id\":\"9\"},\"enums\":{\"ad_type\":[\"offer\"],\"real_estate_type\":[\"1\",\"2\",\"3\"]},\"keywords\":{},\"location\":{},\"ranges\":{}},\"limit\":100, \"offset\": 0, \"limit_alu\":0}";
 		HttpEntity<String> request = new HttpEntity<>(body, headers);
 
 		// post request
-		ResponseEntity<String> response = restTemplate.postForEntity(leboncoinResourceUrl, request, String.class);
+		ResponseEntity<LeBonCoinPageResults> response = restTemplate.postForEntity(leboncoinResourceUrl, request,
+				LeBonCoinPageResults.class);
 
 		// return request 200
 		log.info("Status code : {}", response.getStatusCode());
+		log.info("Count results : {}", response.getBody().getTotal());
 	}
 
 }

@@ -32,3 +32,5 @@ relationship ManyToOne {
 	Property{location} to Location{properties}
 }
 
+paginate Property with pagination
+filter Property

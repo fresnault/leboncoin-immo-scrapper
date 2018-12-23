@@ -3,13 +3,16 @@ package fr.fresnault.web.rest.vm;
 import java.io.Serializable;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 public class LeBonCoinPageResults implements Serializable {
 	
 	private static final long serialVersionUID = -8013782421465327034L;
 
 	private Integer total;
 	
-	private List<LeBonCoinResult> results;
+	@JsonAlias("ads")
+	private List<LeBonCoinProperty> properties;
 
 	public LeBonCoinPageResults() {
 		super();
@@ -24,12 +27,12 @@ public class LeBonCoinPageResults implements Serializable {
 		this.total = total;
 	}
 
-	public List<LeBonCoinResult> getResults() {
-		return results;
+	public List<LeBonCoinProperty> getProperties() {
+		return properties;
 	}
 
-	public void setResults(List<LeBonCoinResult> results) {
-		this.results = results;
+	public void setProperties(List<LeBonCoinProperty> properties) {
+		this.properties = properties;
 	}
 
 }

@@ -1,0 +1,34 @@
+
+
+entity Property {
+	reference Integer required,
+	publicationDate ZonedDateTime required,
+    categoryName String required,
+    subject String required,
+    body String required,
+    url String required,
+    price Integer required
+}
+
+entity Attribute {
+	key String required,
+    value String required,
+    keyLabel String required,
+    valueLabel String required
+}
+
+entity Location {
+    regionName String required,
+    departmentName String required,
+    city String required,
+    zipcode String required
+}
+
+relationship OneToMany {
+	Property{attributes} to Attribute
+}
+
+relationship ManyToOne {
+	Property{location} to Location{properties}
+}
+

@@ -1,5 +1,6 @@
 package fr.fresnault.service;
 
+import java.time.ZoneId;
 import java.util.Arrays;
 
 import javax.annotation.PostConstruct;
@@ -12,12 +13,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import fr.fresnault.domain.Property;
+import fr.fresnault.repository.PropertyRepository;
 import fr.fresnault.web.rest.vm.LeBonCoinPageResults;
+import fr.fresnault.web.rest.vm.LeBonCoinProperty;
 
 @Service
 public class LeBonCoinScrapperService {
 
 	private static final Logger log = LoggerFactory.getLogger(LeBonCoinScrapperService.class);
+
+	private PropertyRepository propertyRepository;
+
+	public LeBonCoinScrapperService(PropertyRepository propertyRepository) {
+		this.propertyRepository = propertyRepository;
+	}
 
 	@PostConstruct
 	public void runScrap() {
@@ -40,7 +50,23 @@ public class LeBonCoinScrapperService {
 
 		// return request 200
 		log.info("Status code : {}", response.getStatusCode());
-		log.info("Count results : {}", response.getBody().getTotal());
+		LeBonCoinPageResults leboncoinPageResults = response.getBody();
+		log.info("Count results : {}", leboncoinPageResults.getTotal());
+
+		for (LeBonCoinProperty property : leboncoinPageResults.getProperties()) {
+			Property propertyToSave = new Property()
+					.reference(property.getReference())
+					.publicationDate(property.getPublicationDate().atZone(ZoneId.systemDefault()))
+					.categoryName(property.getCategoryName())
+					.subject(property.getSubject())
+					.body(property.getBody())
+					.url(property.getUrl())
+					.price(property.getPriceValue())
+					.attributes(property.getAttributes())
+					.location(property.getLocation());
+			
+			propertyRepository.save(propertyToSave);
+		}
 	}
 
 }

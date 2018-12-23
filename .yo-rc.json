@@ -1,0 +1,33 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "fr.fresnault"
+    },
+    "jhipsterVersion": "5.7.2",
+    "applicationType": "microservice",
+    "baseName": "leboncoinImmoScrapper",
+    "packageName": "fr.fresnault",
+    "packageFolder": "fr/fresnault",
+    "serverPort": "8081",
+    "authenticationType": "jwt",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "mongodb",
+    "devDatabaseType": "mongodb",
+    "prodDatabaseType": "mongodb",
+    "searchEngine": "elasticsearch",
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MjFkMGE0Njk1MmExOWFlZjRlZTVlOGI1NjU1ODhlOWVkOGIxY2U2Y2YzYzNiMzdhN2JhZmY2YjVlNjc4ZGM4YmE3YjM3MjdiZTZkOWM2ZmQxNjQ5ZTkyMWU2YTk1ZjljYWMzZjAwNjJkZGVmN2QzNmM0ZmQxOTI5YTMxODQxMDc=",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
